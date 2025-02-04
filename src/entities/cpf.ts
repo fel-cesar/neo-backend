@@ -6,15 +6,15 @@ export type CpfJson = {
 };
 
 export class Cpf {
-  private readonly id: number;
-  private readonly createdAt: Date;
+  public readonly id: number;
+  public readonly createdAt: Date;
   public readonly value: string;
   public readonly blocked: boolean = false;
 
   constructor({
+      id = 0,
     value,
     blocked = false,
-    id = 0,
     createdAt = new Date(),
   }: CpfJson) {
     this.id = id;

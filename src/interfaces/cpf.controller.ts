@@ -3,7 +3,6 @@ import { CpfRepository } from "../repositories/cpf.repository";
 import { CreateCpfUseCase } from "../application/CreateCpfUseCase";
 import { GetAllCpfsUseCase } from "../application/GetAllCpfsUseCase";
 import { DeleteCpfUseCase } from "../application/DeleteCpfUseCase";
-// import { FormatCpfUseCase } from "../application/FormatCpfUseCase";
 
 const cpfRepository = new CpfRepository();
 
@@ -39,14 +38,4 @@ export const CpfController = {
       res.status(400).json({ error: JSON.stringify(error) });
     }
   },
-
-  //   format: async (req: Request, res: Response) => {
-  //     try {
-  //       const { Cpf } = req.params;
-  //       const formatCpf = new FormatCpfUseCase();
-  //       res.json({ formatted: formatCpf.execute(Cpf) });
-  //     } catch (error) {
-  //       res.status(400).json({ error: error.message });
-  //     }
-  //   }
 };
