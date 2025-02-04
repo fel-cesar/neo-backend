@@ -1,6 +1,10 @@
 import { Pool } from "pg";
 // import {} from ""
-export const pool = new Pool({
+
+
+
+// TODO: change to pg data source
+ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 
 //   onConnectionOpened: () => {
