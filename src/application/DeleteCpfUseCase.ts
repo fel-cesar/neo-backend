@@ -1,4 +1,3 @@
-// import { CPFRepository } from "../infrastructure/cpf.repository";
 import { CpfRepository } from "../repositories/cpf.repository";
 
 export class DeleteCpfUseCase {
