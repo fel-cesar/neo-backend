@@ -12,13 +12,18 @@ export class Cpf {
   public readonly blocked: boolean = false;
 
   constructor({
-      id = 0,
+    id,
     value,
     blocked = false,
     createdAt = new Date(),
-  }: CpfJson) {
-    this.id = id;
-    this.createdAt = createdAt;
+  }: {
+    id?: number;
+    value: string;
+    blocked?: boolean;
+    createdAt?: Date;
+  }) {
+    this.id = id ?? 0;
+    this.createdAt = createdAt ?? new Date();
     this.value = value;
     this.blocked = blocked;
 
@@ -27,7 +32,7 @@ export class Cpf {
     }
   }
 
-  toJSON():CpfJson {
+  toJSON(): CpfJson {
     return {
       id: this.id,
       value: this.value,

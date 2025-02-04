@@ -1,28 +1,33 @@
 import { PrismaClient } from "@prisma/client";
 
-// TODO: Implement the repository  interface and also do a PG repo/datasource
-const prisma = new PrismaClient();
-
 export class CpfRepository {
+  // TODO: Prisma repo. TODO: Implement the repository  interface and also do a PG repo/datasource
+
+  readonly _prisma: PrismaClient;
+
+  constructor(prismaClient?: PrismaClient) {
+    this._prisma = prismaClient ?? new PrismaClient();
+  }
+
   async create(cpf: string) {
-    return prisma.cpf.create({ data: { value: cpf } });
+    return this._prisma.cpf.create({ data: { value: cpf } });
   }
 
   async deleteByValue(cpf: string) {
-    return !!(await prisma.cpf.delete({ where: { value: cpf } }));
+    return !!(await this._prisma.cpf.delete({ where: { value: cpf } }));
   }
   async deleteById(id: number) {
-    return prisma.cpf.delete({ where: { id: id } });
+    return this._prisma.cpf.delete({ where: { id: id } });
   }
 
   async findByValue(cpf: string) {
-    return prisma.cpf.findUnique({ where: { value: cpf } });
+    return this._prisma.cpf.findUnique({ where: { value: cpf } });
   }
 
   async exists(cpf: string) {
-    return prisma.cpf.findFirst({ where: { value: cpf } });
+    return this._prisma.cpf.findFirst({ where: { value: cpf } });
   }
   async getAll() {
-    return prisma.cpf.findMany();
+    return this._prisma.cpf.findMany();
   }
 }

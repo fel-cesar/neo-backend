@@ -1,11 +1,16 @@
+import { PrismaClient } from "@prisma/client";
 import { DeleteCpfUseCase } from "../../src/application/DeleteCpfUseCase";
 import { CpfRepository } from "../../src/repositories/cpf.repository";
+import { mockDeep } from "jest-mock-extended";
 
 describe("DeleteCpfUseCase", () => {
   let mockRepository: jest.Mocked<CpfRepository>;
   let deleteCPF: DeleteCpfUseCase;
+  let mockPrisma: PrismaClient;
 
   beforeEach(() => {
+    mockPrisma = mockDeep<PrismaClient>();
+
     mockRepository = {
       create: jest.fn(),
       deleteByValue: jest.fn(),
@@ -13,6 +18,7 @@ describe("DeleteCpfUseCase", () => {
       exists: jest.fn(),
       getAll: jest.fn(),
       findByValue: jest.fn(),
+      _prisma: mockPrisma,
     };
 
     deleteCPF = new DeleteCpfUseCase(mockRepository);

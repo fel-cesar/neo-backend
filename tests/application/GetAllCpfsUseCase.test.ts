@@ -1,19 +1,25 @@
+import { PrismaClient } from "@prisma/client";
 import { GetAllCpfsUseCase } from "../../src/application/GetAllCpfsUseCase";
 import { CpfRepository } from "../../src/repositories/cpf.repository";
+import { mockDeep } from "jest-mock-extended";
 
 describe("GetAllCpfsUseCase", () => {
   let mockRepository: jest.Mocked<CpfRepository>;
   let getAllCPFs: GetAllCpfsUseCase;
+  let mockPrisma: PrismaClient;
 
   beforeEach(() => {
-    mockRepository = {
-      create: jest.fn(),
-      getAll: jest.fn(),
-      findByValue: jest.fn(),
-      deleteById: jest.fn(),
-      deleteByValue: jest.fn(),
-      exists: jest.fn(),
-    };
+    mockPrisma = mockDeep<PrismaClient>();
+    
+        mockRepository = {
+          create: jest.fn(),
+          deleteByValue: jest.fn(),
+          deleteById: jest.fn(),
+          exists: jest.fn(),
+          getAll: jest.fn(),
+          findByValue: jest.fn(),
+          _prisma: mockPrisma,
+        };
 
     getAllCPFs = new GetAllCpfsUseCase(mockRepository);
   });
