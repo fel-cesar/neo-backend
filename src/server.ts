@@ -1,65 +1,17 @@
+// @ts-nocheck
+// Enabling no check here because we are using the `any` type at cors.
+// On prod it will not be used.
 import express from "express";
-import { prisma } from "./db/prisma";
-import { pool } from "./db/pg";
+import cpfRoutes from "./interfaces/cpf.routes";
+import cnpjRoutes from "./interfaces/cnpj.routes";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
 
-type User = {
-  id: string;
-  email: string;
-  password: string;
-  createdAt: Date;
-};
-
-type Cpf = {
-  id: string;
-  value: string;
-  blocked: boolean;
-  createdAt: Date;
-};
-
-// Prisma - Get Users
-app.get("/cpf", async (_, res) => {
-  try {
-    const cpfs = await prisma.cpf.findMany();
-    console.log(cpfs);
-    res.json(cpfs);
-  } catch (err) {
-    res.status(500).json({ error: err });
-  }
-});
-
-app.post("/cpf", async (req, res) => {
-  try {
-    const { value } = req.body;
-    console.log("THIS VALUE ", value);
-
-    const created = await prisma.cpf.create({
-      data: {
-        value: value,
-        blocked: false,
-      },
-    });
-
-    console.log("created!!> ", created);
-  } catch (err) {
-    res.status(500).json({ error: err });
-  }
-});
-
-// PG - Get Users
-// app.get("/pg/cpf", async (_, res) => {
-//   try {
-//     console.log("test")
-//     const result = await pool.query<Cpf>(`SELECT * FROM "Cpf"`);
-//     console.log(result.rowCount);
-//     const users: Cpf[] = result.rows;
-//     res.json(users);
-//   } catch (err) {
-//     res.status(500).json({ error: err });
-//   }
-// });
+app.use(cors());
+app.use("/api", cpfRoutes);
+app.use("/api", cnpjRoutes);
 
 const port = process.env.API_PORT || 3000;
 app.listen(port, () => console.log("Server running on port " + port));
