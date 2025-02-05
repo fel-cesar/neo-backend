@@ -27,10 +27,9 @@ export const CpfController = {
       const getAllCpfs = new GetAllCpfsUseCase(cpfRepository);
 
       const listParams = {};
-      const { filter, blocked, ordering } = req.query;
-
-      if (filter) {
-        (listParams as any).query = filter;
+      const { query, blocked, ordering } = req.query;
+      if (query) {
+        (listParams as any).query = query;
       }
       if ((blocked && blocked === "false") || blocked === "true") {
         (listParams as any).blocked = blocked === "true" ? true : false;
