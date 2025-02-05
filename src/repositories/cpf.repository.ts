@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { CpfJson } from "../entities/cpf";
+import { CpfJson } from "../entities/cpf.entity";
 
 // TODO: create repository interface
 // TODO: implement Data source pattern.

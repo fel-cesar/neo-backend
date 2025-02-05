@@ -13,9 +13,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  // id Int @id @default(autoincrement())
 
+// Legacy model User.
+model User {
   id        String  @id @default(uuid())
   email     String   @unique
   password  String
@@ -23,6 +23,13 @@ model User {
 }
 
 model Cpf {
+  id        Int      @id @default(autoincrement())
+  value     String   @unique
+  blocked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Cnpj {
   id        Int      @id @default(autoincrement())
   value     String   @unique
   blocked   Boolean  @default(false)
