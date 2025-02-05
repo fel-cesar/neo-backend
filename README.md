@@ -7,13 +7,22 @@ It follows **Clean Architecture** and **SOLID principles**, ensuring **scalabili
 
 ### 🔥 Features
 
+✅ Live server status
+
 ✅ CPF Validation and Storage
+
 ✅ CNPJ Validation and Storage
+
 ✅ RESTful API with Express
+
 ✅ PostgreSQL Database (via Prisma or `pg`)
+
 ✅ Follows **Clean Architecture** & **SOLID Principles**
+
 ✅ **Unit and Integration Tested** with Jest
+
 ✅ CI/CD Pipeline with GitHub Actions
+
 ✅ Modular Coding
 
 ---
