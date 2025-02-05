@@ -1,4 +1,4 @@
-import { CpfJson } from "../entities/cpf";
+import { CpfJson } from "../entities/cpf.entity";
 import { CpfRepository } from "../repositories/cpf.repository";
 
 export class GetAllCpfsUseCase {

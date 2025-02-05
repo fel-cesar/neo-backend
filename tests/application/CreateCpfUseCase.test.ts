@@ -32,32 +32,32 @@ describe("CreateCPFUseCase", () => {
     const date = new Date();
     mockRepository.create.mockResolvedValue({
       id: 123,
-      value: "12345678901",
+      value: "12345678909",
       blocked: false,
       createdAt: date,
     });
 
-    const result = await createCPF.execute("12345678901");
+    const result = await createCPF.execute("12345678909");
 
     expect(result).toEqual({
       id: 123,
-      value: "12345678901",
+      value: "12345678909",
       blocked: false,
       createdAt: date,
     });
-    expect(mockRepository.create).toHaveBeenCalledWith("12345678901");
+    expect(mockRepository.create).toHaveBeenCalledWith("12345678909");
   });
 
   it("should throw an error if CPF already exists", async () => {
     const date = new Date();
     mockRepository.findByValue.mockResolvedValue({
       id: 123,
-      value: "12345678901",
+      value: "12345678909",
       blocked: true,
       createdAt: date,
     });
 
-    await expect(createCPF.execute("12345678901")).rejects.toThrow(
+    await expect(createCPF.execute("12345678909")).rejects.toThrow(
       "CPF already exists"
     );
   });
