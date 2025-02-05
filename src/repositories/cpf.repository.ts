@@ -1,5 +1,8 @@
 import { PrismaClient } from "@prisma/client";
+import { CpfJson } from "../entities/cpf";
 
+// TODO: create repository interface
+// TODO: implement Data source pattern.
 export class CpfRepository {
   // TODO: Prisma repo. TODO: Implement the repository  interface and also do a PG repo/datasource
 
@@ -17,17 +20,33 @@ export class CpfRepository {
     return !!(await this._prisma.cpf.delete({ where: { value: cpf } }));
   }
   async deleteById(id: number) {
-    return this._prisma.cpf.delete({ where: { id: id } });
+    return !!(await this._prisma.cpf.delete({ where: { id: id } }));
   }
 
   async findByValue(cpf: string) {
     return this._prisma.cpf.findUnique({ where: { value: cpf } });
   }
 
+  async findById(id: number): Promise<CpfJson | null> {
+    return this._prisma.cpf.findUnique({ where: { id: id } });
+  }
+
   async exists(cpf: string) {
     return this._prisma.cpf.findFirst({ where: { value: cpf } });
   }
+
+  async setBlockedById(id: number, blocked: boolean): Promise<CpfJson> {
+    return this._prisma.cpf.update({
+      where: { id: id },
+      data: { blocked: blocked },
+    });
+  }
+
   async getAll() {
-    return this._prisma.cpf.findMany();
+    return this._prisma.cpf.findMany({
+      orderBy: {
+        id: 'desc',
+      },
+    });
   }
 }
