@@ -42,11 +42,38 @@ export class CpfRepository {
     });
   }
 
-  async getAll() {
-    return this._prisma.cpf.findMany({
+  async getAll({
+    query,
+    blocked,
+    ordering,
+  }: {
+    query?: string;
+    blocked?: boolean;
+    ordering?: "asc" | "desc";
+  }) {
+    const queryArgs = {
       orderBy: {
-        id: 'desc',
+        id: ordering ?? "desc",
       },
-    });
+      where: {},
+    };
+
+    if (query) {
+      queryArgs.where = {
+        ...queryArgs.where,
+        value: {
+          contains: query,
+        },
+      };
+    }
+
+    if (blocked !== undefined) {
+      queryArgs.where = {
+        ...queryArgs.where,
+        blocked: blocked,
+      };
+    }
+
+    return this._prisma.cpf.findMany(queryArgs);
   }
 }
