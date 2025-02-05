@@ -22,10 +22,24 @@ export const CpfController = {
     }
   },
 
-  getAll: async (_: Request, res: Response) => {
+  getAll: async (req: Request, res: Response) => {
     try {
       const getAllCpfs = new GetAllCpfsUseCase(cpfRepository);
-      const cpfs = await getAllCpfs.execute();
+
+      const listParams = {};
+      const { filter, blocked, ordering } = req.query;
+
+      if (filter) {
+        (listParams as any).query = filter;
+      }
+      if ((blocked && blocked === "false") || blocked === "true") {
+        (listParams as any).blocked = blocked === "true" ? true : false;
+      }
+      if (ordering) {
+        (listParams as any).ordering = ordering;
+      }
+
+      const cpfs = await getAllCpfs.execute(listParams);
       res.json(cpfs);
     } catch (error) {
       res.status(400).json({ error: (error as Error).message });

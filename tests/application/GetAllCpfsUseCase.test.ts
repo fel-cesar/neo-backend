@@ -36,7 +36,7 @@ describe("GetAllCpfsUseCase", () => {
       { id: 2, value: "98765432100", blocked: true, createdAt: createdDate2 },
     ]);
 
-    const result = await getAllCPFs.execute();
+    const result = await getAllCPFs.execute({});
 
     expect(result).toHaveLength(2);
     expect(result[0].value).toBe("12345678901");
@@ -47,7 +47,7 @@ describe("GetAllCpfsUseCase", () => {
   it("should return an empty list when no CPFs exist", async () => {
     mockRepository.getAll.mockResolvedValue([]);
 
-    const result = await getAllCPFs.execute();
+    const result = await getAllCPFs.execute({});
 
     expect(result).toEqual([]);
   });
