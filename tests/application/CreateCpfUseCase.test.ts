@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { CreateCpfUseCase } from "../../src/application/CreateCpfUseCase";
+import { CreateCpfUseCase } from "../../src/application/create-cpf.usecase";
 import { CpfRepository } from "../../src/repositories/cpf.repository";
 import { mockDeep } from "jest-mock-extended";
 
