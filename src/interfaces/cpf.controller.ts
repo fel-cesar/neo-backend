@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { CpfRepository } from "../repositories/cpf.repository";
-import { CreateCpfUseCase } from "../application/CreateCpfUseCase";
-import { GetAllCpfsUseCase } from "../application/GetAllCpfsUseCase";
-import { DeleteCpfUseCase } from "../application/DeleteCpfUseCase";
-import { SwitchBlockCpfUseCase } from "../application/SwitchBlockCpfUseCase";
+import { CreateCpfUseCase } from "../application/create-cpf.usecase";
+import { GetAllCpfsUseCase } from "../application/get-all-cpfs.usecase";
+import { DeleteCpfUseCase } from "../application/delete-cpf.usecase";
+import { SwitchBlockCpfUseCase } from "../application/switch-block-cpf.usecase";
 
 const cpfRepository = new CpfRepository();
 
