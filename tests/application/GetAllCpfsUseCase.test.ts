@@ -10,16 +10,18 @@ describe("GetAllCpfsUseCase", () => {
 
   beforeEach(() => {
     mockPrisma = mockDeep<PrismaClient>();
-    
-        mockRepository = {
-          create: jest.fn(),
-          deleteByValue: jest.fn(),
-          deleteById: jest.fn(),
-          exists: jest.fn(),
-          getAll: jest.fn(),
-          findByValue: jest.fn(),
-          _prisma: mockPrisma,
-        };
+
+    mockRepository = {
+      create: jest.fn(),
+      deleteByValue: jest.fn(),
+      deleteById: jest.fn(),
+      exists: jest.fn(),
+      getAll: jest.fn(),
+      findByValue: jest.fn(),
+      findById: jest.fn(),
+      setBlockedById: jest.fn(),
+      _prisma: mockPrisma,
+    };
 
     getAllCPFs = new GetAllCpfsUseCase(mockRepository);
   });

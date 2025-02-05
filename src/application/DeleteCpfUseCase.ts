@@ -3,13 +3,11 @@ import { CpfRepository } from "../repositories/cpf.repository";
 export class DeleteCpfUseCase {
   constructor(private cpfRepository: CpfRepository) {}
 
-  async execute(cpfValue: string): Promise<boolean> {
-    const existing = await this.cpfRepository.findByValue(cpfValue);
-
+  async execute(cpfId: string): Promise<boolean> {
+    const existing = await this.cpfRepository.findById(Number(cpfId));
     if (!existing) {
       throw new Error("CPF not found");
     }
-
-    return this.cpfRepository.deleteByValue(cpfValue);
+    return this.cpfRepository.deleteById(Number(cpfId));
   }
 }

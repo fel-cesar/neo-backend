@@ -18,6 +18,8 @@ describe("DeleteCpfUseCase", () => {
       exists: jest.fn(),
       getAll: jest.fn(),
       findByValue: jest.fn(),
+      findById: jest.fn(),
+      setBlockedById: jest.fn(),
       _prisma: mockPrisma,
     };
 
@@ -25,20 +27,19 @@ describe("DeleteCpfUseCase", () => {
   });
 
   it("should delete a CPF if it exists", async () => {
-    mockRepository.findByValue.mockResolvedValue({
+    mockRepository.findById.mockResolvedValue({
       id: 1,
       value: "12345678901",
       blocked: false,
       createdAt: new Date(),
     });
 
-    mockRepository.deleteByValue.mockResolvedValue(true);
-    mockRepository.deleteByValue.mockResolvedValue(true);
+    mockRepository.deleteById.mockResolvedValue(true);
 
-    const result = await deleteCPF.execute("12345678901");
+    const result = await deleteCPF.execute("1");
 
     expect(result).toBe(true);
-    expect(mockRepository.deleteByValue).toHaveBeenCalledWith("12345678901");
+    expect(mockRepository.deleteById).toHaveBeenCalledWith(1);
   });
 
   it("should throw an error if CPF does not exist", async () => {

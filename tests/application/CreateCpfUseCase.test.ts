@@ -18,6 +18,8 @@ describe("CreateCPFUseCase", () => {
       exists: jest.fn(),
       getAll: jest.fn(),
       findByValue: jest.fn(),
+      findById: jest.fn(),
+      setBlockedById: jest.fn(),
       _prisma: mockPrisma,
     };
 
