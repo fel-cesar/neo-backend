@@ -6,9 +6,11 @@ import cpfRoutes from "./interfaces/cpf.routes";
 import cnpjRoutes from "./interfaces/cnpj.routes";
 import serverStatsRoutes from "./interfaces/server-status-routes";
 import cors from "cors";
+import { requestCounterMiddleware } from "./middlewares/server-status-middleware";
 
 const app = express();
 app.use(express.json());
+app.use(requestCounterMiddleware); // ✅ Apply the request counter middleware
 
 app.use(cors());
 app.use("/api", cpfRoutes);
