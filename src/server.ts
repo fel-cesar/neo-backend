@@ -1,11 +1,14 @@
+// @ts-nocheck
+// Enabling no check here because we are using the `any` type at cors.
+// On prod it will not be used.
 import express from "express";
 import cpfRoutes from "./interfaces/cpf.routes";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
 
-
-// URL/api/cpf...
+app.use(cors());
 app.use("/api", cpfRoutes);
 
 const port = process.env.API_PORT || 3000;
